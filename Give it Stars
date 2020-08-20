@@ -1,0 +1,21 @@
+import cv2 as c
+import numpy as np
+
+img = c.imread(r"C:\Users\DCS\Desktop\Shaurya\4dm18178.jpg")
+
+hieght,width= 200,300
+
+
+
+pts1= np.float32([[48,151],[348,151],[48,350],[348,351]])
+pts2= np.float32([[0,0],[width,0],[0,hieght],[width,hieght]])
+m= c.getPerspectiveTransform(pts1,pts2)
+Output_after_warp_perspective_is = c.warpPerspective(img,m,(width,hieght))
+
+for x in range (0,4):
+    c.circle(img,(pts1[x][0],pts1[x][1]),3,(0,0,255),c.FILLED)
+
+
+c.imshow("Normal Image",img)
+c.imshow("Output after warp perspective",Output_after_warp_perspective_is)
+c.waitKey(0)
